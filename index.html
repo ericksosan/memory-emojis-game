@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Emojis</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="game__container">
+      <div class="game__header">
+        <h1>Memory Emojis</h1>
+        <div class="sub__header">
+          <button id="reset">Reset</button>
+          <div class="controls">
+            <select id="level">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="analytics">
+          <div class="matched">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M7 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+              <path
+                d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />
+            </svg>
+            <p>
+              <span id="total_matched">0</span> /
+              <span id="total_card_to_match">0</span>
+            </p>
+          </div>
+
+          <div class="user_move">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 3l0 18" />
+              <path d="M16 7l0 10l5 0l-5 -10" />
+              <path d="M8 7l0 10l-5 0l5 -10" />
+            </svg>
+            <span id="move">0</span>
+          </div>
+
+          <div class="time">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+              <path d="M12 12l3 -2" />
+              <path d="M12 7v5" />
+            </svg>
+            <span id="timer">0s</span>
+          </div>
+        </div>
+      </div>
+      <div class="game__board"></div>
+    </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <h1 id="endText"></h1>
+
+        <p>
+          Great it only took you <span id="timeText"></span> and only
+          <span id="moveText"></span> moves.
+        </p>
+        <button id="playAgain">Play again</button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="/src/main.js"></script>
+  </body>
+</html>

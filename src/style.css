@@ -1,0 +1,235 @@
+:root {
+  --template-rows: 2;
+  --template-columns: 2;
+  --card-height: 200px;
+  --card-width: 250px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  border: none;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #111927;
+  background-image: radial-gradient(
+      at 47% 33%,
+      hsl(162, 77%, 40%) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 50% 15%, hsl(218, 39%, 11%) 0, transparent 55%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game__container {
+  display: flex;
+  flex-direction: column;
+
+  backdrop-filter: blur(5px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+
+  padding: 1rem;
+}
+
+.game__header {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+.sub__header {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sub__header button,
+.sub__header select,
+#playAgain {
+  padding: 10px 30px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  cursor: pointer;
+  color: white;
+}
+
+.sub__header select {
+  padding: 10px;
+}
+
+.analytics {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: start;
+  width: 100%;
+  padding: 1rem;
+}
+
+.matched,
+.time,
+.user_move {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.game__board {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(var(--template-columns), 1fr);
+  grid-template-rows: repeat(var(--template-rows), 1fr);
+  perspective: 1200px;
+  gap: 1rem;
+}
+
+.card {
+  width: var(--card-width);
+  height: var(--card-height);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: transform 300ms ease;
+  transform-style: preserve-3d;
+
+  position: relative;
+  user-select: none;
+}
+
+.face,
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.face {
+  backdrop-filter: blur(25px) saturate(120%);
+  -webkit-backdrop-filter: blur(25px) saturate(120%);
+  background-color: rgba(17, 25, 40, 1);
+}
+
+.face p {
+  font-size: 4.5rem;
+  transform: translateY(10px);
+}
+
+.back {
+  backdrop-filter: blur(25px) saturate(120%);
+  -webkit-backdrop-filter: blur(50px) saturate(300%);
+  background-color: rgba(17, 25, 40, 1);
+  backface-visibility: hidden;
+}
+
+.face-up {
+  transform: rotateY(180deg);
+}
+
+.match .face {
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(17, 25, 40, 0);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  cursor: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(17, 25, 40, 0);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    width: 30%;
+  }
+}
+
+button {
+  transform: scale(1);
+  transition: transform 300ms ease;
+}
+
+button:active {
+  transform: scale(0.8);
+}
+
+#reset {
+  background-color: crimson;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+#reset.active {
+  pointer-events: auto;
+  opacity: 1;
+}
